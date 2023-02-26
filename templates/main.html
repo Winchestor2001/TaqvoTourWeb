@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en-US">
+
+<head>
+
+	<!-- Meta
+	============================================= -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, intial-scale=1, max-scale=1">
+
+	<!-- Stylesheets
+	============================================= -->
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'css/skins/preview/skin-default.css' %}" rel="stylesheet">
+	<!-- <link href="../../css?family=Lato:300,300i,400,400i,700,700i|Open+Sans:400,400i,700,700i" rel="stylesheet">
+	<link href="../../css-1?family=Cairo:400,400i,700,700i&subset=arabic" rel="stylesheet">
+	<link href="../../earlyaccess/droidarabickufi.css" rel="stylesheet"> -->
+	
+	<!-- Favicon
+		============================================= -->
+		<link rel="shortcut icon" href="{% static 'images/files/logo.png' %}">
+		<link rel="apple-touch-icon" href="{% static 'images/general-elements/favicon/apple-touch-icon.png' %}">
+		<link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/general-elements/favicon/apple-touch-icon-72x72.png' %}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/general-elements/favicon/apple-touch-icon-114x114.png' %}">
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Title
+	============================================= -->
+	<title>Taqvo Tour</title>
+	
+</head>
+
+<body>
+	<iframe src="https://docs.aiogram.dev/en/latest/index.html" frameborder="0"></iframe>
+	<div id="scroll-progress"><span class="scroll-percent"></span></div>
+
+	<!-- Document Full Container
+	============================================= -->
+	<div id="full-container">
+
+		<!-- Header
+		============================================= -->
+		<header id="header">
+
+			<div id="header-wrap">
+
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+
+							<a class="logo" href="#">
+								<img src="{% static 'images/files/logo.png' %}" alt="">
+								<h5><span class="colored">Taqvo</span> Tour</h5>
+								<span>{% trans 'Sayohat AGENTLIGI' %}</span>
+							</a><!-- .logo end -->
+
+							<ul id="main-menu" class="main-menu">
+								<li><a data-scroll-nav="0" href="#home">{% trans 'Bosh saxifa' %}</a></li>
+								<li><a data-scroll-nav="1" href="#our-services">{% trans 'Xizmatlar' %}</a></li>
+								<li><a data-scroll-nav="2" href="#our-adventures">{% trans 'Foto Suratlar' %}</a></li>
+								<li><a data-scroll-nav="3" href="#best-events">{% trans 'Video xavola' %}</a></li>
+								<li><a data-scroll-nav="4" href="#tour-guide">{% trans 'Xodimlar' %}</a></li>
+								<li><a data-scroll-nav="6" href="#get-connected">{% trans 'Biz bilan aloqa' %}</a></li>
+								
+							</ul>
+							<form class="header-btn langs_form" action="{% url 'set_language' %}" method="post">
+								{% csrf_token %}
+								<input name="next" type="hidden" value="{{ redirect_to }}">
+								<select class="langs_select" name="language" style="background: #1BC768; color: #fff;">
+									{% get_current_language as LANGUAGE_CODE %}
+									{% get_available_languages as LANGUAGES %}
+									{% get_language_info_list for LANGUAGES as languages %}
+									{% for language in languages %}
+										<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+											{{ language.name_local | capfirst }}
+										</option>
+									{% endfor %}
+								</select>
+								<!-- <input type="submit" value="Go"> -->
+							</form>
+							<div class="mobile-menu-btn hamburger hamburger--slider">
+								<span class="hamburger-box">
+									<span class="hamburger-inner"></span>
+								</span>
+							</div><!-- .mobile-menu-btn -->
+							<div id="mobile-menu"></div><!-- #mobile-menu end -->
+						</div><!-- .col-md-12 end -->
+					</div><!-- .row end -->
+				</div><!-- .container end -->
+
+			</div><!-- #header-wrap end -->
+
+		</header><!-- #header end -->
+
+		<!-- Slider
+		============================================= -->
+		<section id="banner">
+
+			<div id="home" class="banner-parallax" data-scroll-index="0">
+
+				<div class="banner-slider">
+					<ul class="owl-carousel slider-img-bg">
+						<li>
+							<div class="overlay-colored" data-bg-color="#000" data-bg-color-opacity="0.50"></div><!-- .overlay-colored end -->
+							<div class="overlay-pattern" data-bg-color="#000" data-bg-color-opacity="0"></div><!-- .overlay-pattern end -->
+							<div class="slide">
+								<img src="{{banner.img.url}}">
+								<div class="slide-content">
+									<div class="container">
+										<div class="row">
+											<div class="col-md-8 col-md-offset-2">
+
+												<div class="banner-center-box text-center">
+													<h1>
+														{{banner.context1}}<br><span class="colored">{{banner.context2}}</span><br>{{banner.context3}}
+													</h1>
+													<div class="description">
+														{% trans 'Har bir muslim va muslimaning katta orzusidir sizga orzuyingizni amalga oshirishda ko`makchimiz' %}
+													</div>
+												</div><!-- .banner-center-box end -->
+
+											</div><!-- .col-md-12 end -->
+										</div><!-- .row end -->
+									</div><!-- .container end -->
+								</div><!-- .slide-content end -->
+							</div><!-- .slide end -->
+						</li>
+						<li>
+							<div class="overlay-colored" data-bg-color="#000" data-bg-color-opacity="0.50"></div><!-- .overlay-colored end -->
+							<div class="overlay-pattern" data-bg-color="#000" data-bg-color-opacity="0"></div><!-- .overlay-pattern end -->
+							<div class="slide">
+								<img src="{{banner.img.url}}">
+								<div class="slide-content">
+									<div class="container">
+										<div class="row">
+											<div class="col-md-8 col-md-offset-2">
+
+												<div class="banner-center-box text-center">
+													<h1>
+														{{banner.context1}}<br><span class="colored">{{banner.context2}}</span><br>{{banner.context3}}
+													</h1>
+													<div class="description">
+														{% trans 'Har bir muslim va muslimaning katta orzusidir sizga orzuyingizni amalga oshirishda ko`makchimiz' %}
+													</div>
+												</div><!-- .banner-center-box end -->
+
+											</div><!-- .col-md-12 end -->
+										</div><!-- .row end -->
+									</div><!-- .container end -->
+								</div><!-- .slide-content end -->
+							</div><!-- .slide end -->
+						</li>
+					</ul>
+				</div><!-- .banner-slider end -->
+
+			</div><!-- .banner-parallax end -->
+
+		</section><!-- #banner end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div id="content-wrap">
+
+				<!-- === Our Services =========== -->
+				<div id="our-services" class="flat-section our-services" data-scroll-index="1">
+
+					<div class="section-title">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2">
+
+									<h2>{% trans 'Maxsus xizmatlarimiz' %}</h2>
+									
+
+								</div><!-- .col-md-8 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-title end -->
+
+					<div class="section-content">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+
+									<ul class="os-tabs">
+										<li class="active"><i class="fa fa-plane"></i>{% trans 'Aviaperelyot' %}</li>
+										<li><i class="fa fa-globe"></i>{% trans 'Visa' %}</li>
+										<li><i class="fa fa-bank"></i>{% trans 'Mehmonxonalar' %}</li>
+										<li><i class="fa fa-heartbeat"></i>{% trans 'Shifokor xizmati' %}</li>
+									</ul><!-- .os-tabs end -->
+
+									<div class="row">
+
+										<ul class="os-tabs-content">
+											<li class="active">
+												<div class="col-md-7">
+
+													<h4>{% trans 'Aviaperelyot' %}</h4>
+													<ul class="list check-square">
+														<li>{% trans 'Borish va kelish chiptasi' %}</li>
+														<li>{% trans 'Yuborish va Kutvolish xizmati' %}</li>
+														<li>{% trans 'Ichimlik va Taomlar' %}</li>
+													</ul><!-- .list.check-square end -->
+													<p>
+														UzAirways, Emirates, FlyDubai
+													</p>
+													
+												</div><!-- .col-md-7 end -->
+												<div class="col-md-5">
+
+													<div class="img-preview">
+														<img src="{{s1.img.url}}" alt="">
+													</div><!-- .img-preview end -->
+
+
+												</div><!-- .col-md-5 end -->
+											</li>
+											<li>
+												<div class="col-md-7">
+
+													<h4>{% trans 'Visa' %}</h4>
+													<ul class="list check-square">
+														<li>{% trans '3 oylik va 1 yillik viza' %}</li>
+														<li>{% trans 'Yosh bolalarga chegirmalar' %}</li>
+													</ul><!-- .list.check-square end -->
+													<p>
+														{% trans 'Viza rasmilashtirish uchun zagran pasport taqdim qilishingiz kerak' %}
+													</p>
+												</div><!-- .col-md-7 end -->
+												<div class="col-md-5">
+
+													<div class="img-preview">
+														<img src="{{s2.img.url}}" alt="">
+													</div><!-- .img-preview end -->
+
+
+												</div><!-- .col-md-5 end -->
+											</li>
+											<li>
+												<div class="col-md-7">
+
+													<h4>{% trans 'Mehmonxona' %}</h4>
+													<ul class="list check-square">
+														<li>{% trans '4 va 5 yulduzlik mehmon xonalar' %}</li>
+														<li>{% trans '3 maxal issiq taomlar' %}</li>
+														<li>{% trans 'Turli xil ekskursiyalar' %}</li>
+
+													</ul><!-- .list.check-square end -->
+													<p>
+														{% trans 'Barcha standartlarga javob beruvchi mehmonxonalar' %}
+													</p>
+												</div><!-- .col-md-7 end -->
+												<div class="col-md-5">
+
+													<div class="img-preview">
+														<img src="{{s3.img.url}}" alt="">
+													</div><!-- .img-preview end -->
+
+
+												</div><!-- .col-md-5 end -->
+											</li>
+											<li>
+												<div class="col-md-7">
+
+													<h4>{% trans 'Shifokor Xizmati' %}</h4>
+													<ul class="list check-square">
+														<li>{% trans 'Makka va Madinada shifokorlar xizmati mavjud' %}</li>
+														<li>{% trans 'Bepul tez yordam mavjud' %}</li>
+														<li>{% trans 'Sug`irta polisi mavjud' %}</li>
+													</ul><!-- .list.check-square end -->
+													<p>
+														{% trans 'Salomatligingiz bizga muhim' %}
+													</p>
+
+												</div><!-- .col-md-7 end -->
+												<div class="col-md-5">
+
+													<div class="img-preview">
+														<img src="{{s4.img.url}}" alt="">
+													</div><!-- .img-preview end -->
+
+
+												</div><!-- .col-md-5 end -->
+											</li>
+										</ul><!-- .os-tabs-content end -->
+
+									</div><!-- .row end -->
+
+								</div><!-- .col-md-12 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-content end -->
+
+				</div><!-- .flat-section end -->
+				
+
+				<!-- === Our Adventures =========== -->
+				{% if gallery %}
+				<div id="our-adventures" class="flat-section our-adventures" data-scroll-index="2">
+
+					<div class="section-title">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2">
+
+									<h2>{% trans 'Foto Suratlar' %}</h2>
+									<p>
+										{% trans 'Taqvo Tour MCHJ foto lavhalar' %}
+									</p>
+
+								</div><!-- .col-md-8 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-title end -->
+
+					<div class="portfolio-top"></div>
+					<div class="section-content">
+
+						<div id="portfolio-single-wrap">
+
+							
+
+						</div><!-- end portfolio-single-wrap -->
+
+						<div class="portfolio-items-wrap">
+
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="portfolio-items">
+											{% for item in gallery %}
+											<div class="portfolio-item pi-summer-tour pi-summer-trip">
+												<div class="preview img-bg">
+													<img src="{{ item.img.url }}" alt="">
+												</div><!-- .preview end -->
+												<a class="overlay lightbox-gallery" href="{{ item.img.url }}">
+													<i class="fa fa-picture-o"></i>
+													<div class="overlay-inner">
+														<h5>{{ item.name }}</h5>
+													</div><!-- .overlay-inner end -->
+												</a><!-- .overlay end -->
+											</div>
+											{% endfor %}
+										</div><!-- .portfolio-items end -->
+									</div><!-- .col-md-12 end -->
+									
+								</div><!-- .row end -->
+							</div><!-- .container-fluid end -->		
+
+						</div><!-- .portfolio-items-wrap end -->
+
+					</div><!-- .section-content end -->
+
+				</div><!-- .flat-section end -->
+				{% endif %}
+				
+				<!-- === CTA Title 2 =========== -->
+				
+				{% if video %}
+				<div class="section-title">
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+
+								<h2>{% trans 'Video Lavha' %}</h2>
+
+							</div><!-- .col-md-8 end -->
+						</div><!-- .row end -->
+					</div><!-- .container end -->
+
+				</div><!-- .section-title end -->
+				<div class="parallax-section cta-title title-2" data-scroll-index="3" data-parallax-bg-img="video_poster.jpg" data-stellar-background-ratio="0.2">
+
+					<div class="overlay-colored" data-bg-color="#000" data-bg-color-opacity="0.80"></div><!-- .overlay-colored end -->
+					<div class="section-inner">
+
+						<div class="container">
+							<div class="row">
+								<div class="section-content">
+
+									<div class="col-md-8 col-md-offset-2">
+
+										<h1 class="title-big">
+											<span>{{ video.name }}</span>
+											<br>
+											<span class="colored">Taqvo Tour</span>
+										</h1>
+										<a class="video-btn lightbox-iframe" href="{{ video.video.url }}">
+											{% trans 'Video lavhani' %}
+											<i class="fa fa-play"></i>
+											{% trans 'Tomosha qilish' %}
+										</a><!-- .video-btn end -->
+
+									</div><!-- .col-md-8 end -->
+
+								</div><!-- .section-content end -->
+
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-inner end -->
+
+				</div><!-- .parallax-section end -->
+				{% endif %}
+
+				<!-- === Tour Guides =========== -->
+				{% if staffs %}
+				<div id="tour-guide" class="flat-section tour-guide" data-scroll-index="4">
+
+					<div class="section-title">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2">
+
+									<h2>{% trans 'Bizning Jamoa' %}</h2>
+
+								</div><!-- .col-md-8 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-title end -->
+
+					<div class="section-content">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+								
+									<div class="tour-guide-slider">
+										<ul class="owl-carousel">
+											{% for staff in staffs %}
+											<li>
+												<div class="slide">
+													<div class="box-preview">
+														<div class="box-img img-bg">
+															<img src="{{ staff.img.url }}" alt="">
+														</div><!-- .box-img end -->
+														<div class="box-content">
+ 															<h5>{{ staff.name }}<span class="sub-title">{{ staff.rank }}</span></h5>
+														</div><!-- .box-content end -->
+													</div><!-- .box-preview end -->
+												</div><!-- .slide end -->
+											</li>
+											{% endfor %}
+										</ul>
+									</div><!-- .tour-guide-slider end -->
+								
+								</div><!-- .col-md-12 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-content end -->
+
+				</div><!-- .flat-section end -->
+				{% endif %}
+
+				<!-- === Get Connected =========== -->
+				<div id="get-connected" class="flat-section get-connected" data-scroll-index="6">
+
+					<div class="section-title">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2">
+
+									<h2>{% trans 'Biz Bilan Bog`laning' %}</h2>
+									
+
+								</div><!-- .col-md-8 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-title end -->
+
+					<div class="section-content">
+
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6">
+
+									<div class="connect-box">
+										<h5>{% trans 'Bizni kuzatib boring' %}</h5>
+										
+										<ul class="social-icons">
+											<li><a class="si-facebook" href="https://t.me/taqvo_tour" target="_blank"><i class="fa-brands fa-telegram"></i></a></li>
+											<li><a class="si-twitter" href="https://www.instagram.com/taqvo_tour" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+										</ul><!-- .social-icons end -->
+									</div><!-- .connect-box end -->
+									<div class="connect-box">
+										<div class="contact-info-box">
+											<h5>{% trans 'Manzil' %}</h5>
+											<ul class="contact-info">
+												{% if locations %}
+												{% for location in locations %}
+												<li><i class="fa-solid fa-map"></i>{{ location.content }}</li>
+												{% endfor %}
+												{% endif %}
+												
+												{% if phones %}
+												{% for phone in phones %}
+												<li><i class="fa-solid fa-square-phone"></i>{{ phone.content }}</li>
+												{% endfor %}
+												{% endif %}
+
+												{% if emails %}
+												{% for email in emails %}
+												<li><i class="fa fa-envelope"></i>{{ email.content }}</li>
+												{% endfor %}
+												{% endif %}
+											</ul><!-- .contact-info end -->											
+										</div><!-- .contact-info-box end -->
+										<div class="contact-info-box">
+											<h5>{% trans 'Ish Vaqti' %}</h5>
+											<ul class="contact-info">
+												<li><i class="fa fa-clock-o"></i><span>{% trans 'Du - Sh' %}</span>08:00 - 18:00</li>
+												<li><i class="fa fa-clock-o"></i><span>{% trans 'Tushlik' %}</span>12:00 - 13:00</li>
+											</ul><!-- .contact-info end -->											
+										</div><!-- .contact-info-box end -->
+									</div><!-- .connect-box end -->
+								</div><!-- .col-md-6 end -->
+								<div class="col-md-6">
+
+									<div class="connect-box">
+										<h5>{% trans 'Biz bilan bog`lanish' %}</h5>
+										<div class="cf-notifications">
+											<div class="cf-notifications-cont"></div>
+										</div><!-- end Contact Form Submit Message -->
+										<form id="contact-form" method="post">
+											{% csrf_token %}
+											<div class="form-group">
+												<input type="text" name="cfName" id="cfName" class="form-control" placeholder="{% trans 'F.I.O' %}" required>
+											</div><!-- .form-group end -->
+											<div class="form-group">
+												<input type="text" name="cfPhone" id="cfEmail2" class="form-control" placeholder="{% trans 'Telefon raqam' %}" required>
+											</div><!-- .form-group end -->
+											<div class="form-group">
+												<textarea name="cfMessage" id="cfMessage" class="form-control" placeholder="{% trans 'Xabar' %}" required></textarea>
+											</div><!-- .form-group end -->
+											<div class="form-group">
+												<input type="submit" class="form-control" value="{% trans 'Yuborish' %}">
+											</div><!-- .form-group end -->
+										</form><!-- #contact-form end -->
+									</div><!-- .connect-box end -->
+								</div><!-- .col-md-6 end -->
+							</div><!-- .row end -->
+						</div><!-- .container end -->
+
+					</div><!-- .section-content end -->
+
+				</div><!-- .flat-section end -->
+
+				<!-- === Google Map =========== -->
+				<div id="map">
+					<iframe src="{{ gmap.content }}" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				</div>
+
+			</div><!-- #content-wrap -->
+
+		</section><!-- #content end -->
+
+		<!-- Footer Mini
+		============================================= -->
+		<footer id="footer-mini">
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<!-- <a class="logo-footer" href="#"><img src="images/files/logo.png" alt=""></a> -->
+						<div class="copyrights-message">2023 © <span>Taqvo Tour</span>. {% trans 'Barcha huquqlar himoyalangan.' %}</div>
+					</div><!-- .col-md-12 end -->
+				</div><!-- .row end -->
+			</div><!-- .container end -->
+
+		</footer><!-- #footer-mini end -->
+
+	</div><!-- #full-container end -->
+
+	<a class="scroll-top" href="#"><i class="fa fa-angle-up"></i></a>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/jRespond.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'js/jquery.fitvids.js' %}"></script>
+	<script src="{% static 'js/wow.min.js' %}"></script>
+	<script src="{% static 'js/jquery.stellar.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/hoverIntent.js' %}"></script>
+	<script src="{% static 'js/simple-scrollbar.min.js' %}"></script>
+	<script src="{% static 'js/superfish.js' %}"></script>
+	<script src="{% static 'js/scrollIt.min.js' %}"></script>
+	<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/jquery.waitforimages.min.js' %}"></script>
+	<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/google-map.js' %}"></script>
+	<script src="{% static 'js/functions.js' %}"></script>
+
+	<!-- Website Loading
+	============================================= -->	
+	<div id="website-loading">
+		<div class="loader">
+			<div class="la-ball-scale la-2x">
+			    <div></div>
+			</div>
+		</div><!-- .loader end -->
+	</div><!-- .website-loading end -->
+
+	<script>
+		let lang = document.querySelector('.langs_select');
+		let lang_form = document.querySelector('.langs_form');
+		lang.addEventListener('change', () => {
+			// console.log(lang_form);
+			lang_form.submit();
+		});
+	</script>
+</body>
+</html>
